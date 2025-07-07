@@ -1,7 +1,7 @@
-const authEndpoint = "https://accounts.spotify.com/authorize?";
-const clientId = "b8ce6957508c4ce089d50230e6748d1a";
-const redirecturl = "http://localhost:5173";
-const scopes = ["user-library-read", "playlist-read-private"];
+const authEndpoint = import.meta.env.VITE_REACT_APP_AUTH_ENDPOINT;
+const clientId = import.meta.env.VITE_REACT_APP_CLIENT_ID;
+const redirecturl = import.meta.env.VITE_REACT_APP_REDIRECT_URL;
+const scopes = import.meta.env.VITE_REACT_APP_SCOPES.split(" ");
 
 export const loginEndpoint = `${authEndpoint}client_id=${clientId}&redirect_uri=${redirecturl}&scope=${scopes.join(
   "%20"

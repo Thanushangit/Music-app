@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 spotify.js
+.env
 
 # Editor directories and files
 .vscode/*
