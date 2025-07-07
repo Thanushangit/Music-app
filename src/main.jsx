@@ -16,19 +16,6 @@ const router = createBrowserRouter([
     path: "/",
     element: <MainLayout />,
     errorElement: <NotFound />,
-    children: [
-      {
-        path:"/", element: <MainPage/>,
-        children: [
-          { index:true, element: <Library /> },
-          { path: "feed", element: <Feed /> },
-          { path: "treding", element: <Trending /> },
-          { path: "player", element: <Player /> },
-          { path: "favourites", element: <Favourite /> },
-        ]
-      }
-
-    ],
   },
 ]);
 
