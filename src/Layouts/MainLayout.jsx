@@ -6,6 +6,7 @@ import { IoShuffle, IoShareSocialOutline } from "react-icons/io5";
 import { MdSkipNext, MdSkipPrevious, MdLoop } from "react-icons/md";
 import { IoMdPlay, IoMdPause } from "react-icons/io";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
+import Slider from "../Components/Slider";
 
 
 const MainLayout = () => {
@@ -48,19 +49,14 @@ const MainLayout = () => {
                         <MusicCard />
                         <MusicCard />
 
-
                     </div>
 
 
-                    <div className="w-full md:w-1/2  h-full flex items-center justify-center gap-3 md:gap-10 flex-col overflow-hidden">
-                        <div className="border-4 border-amber-300 rounded-full overflow-hidden ">
-                            <img src="https://imagecdn.raaga.com/raagaimg/r_img/250/t/t0003506.jpg" alt="image" className="object-center object-cover rounded-full m-1 w-52 h-52 md:w-full md:h-full" />
-                        </div>
-
-                        <div className="h-16 w-full">
-                            <img src="./play.PNG" alt="player" className="object-bottom  h-full w-full" />
-                        </div>
+                    <div className="w-full md:w-1/2  h-full  overflow-hidden">
+                        <Slider />
                     </div>
+
+
                 </div>
 
                 <footer className="mt-2 relative   flex flex-col-reverse md:flex-row items-center justify-between gap-y-3">
