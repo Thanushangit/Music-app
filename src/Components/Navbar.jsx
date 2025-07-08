@@ -1,7 +1,7 @@
 import { BsHeadphones } from "react-icons/bs";
 const Navbar = () => {
     return (
-        <div className="flex items-center justify-between border border-gray-400">
+        <div className="flex items-center justify-between ">
             <div className="flex items-center justify-center text-xl md:text-3xl text-gray-300 gap-1 font-saira font-bold">
                 <h1> <BsHeadphones /></h1>
                 <h1>Tunify Music</h1>
