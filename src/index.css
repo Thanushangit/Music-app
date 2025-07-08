@@ -1,1 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Cascadia+Code:ital,wght@0,200..700;1,200..700&family=Saira:ital,wght@0,100..900;1,100..900&display=swap');
+
 @import "tailwindcss";
+
+
+@theme{
+    --font-cascadia:"Cascadia Code", sans-serif;
+    --font-saira:"Saira", sans-serif;
+}
+
+.mycontainer{
+    @apply  mx-auto px-4 py-2 md:px-8 md:py-4;
+}
+
+.musiccard::-webkit-scrollbar{
+    scrollbar-width: none;
+}
+
+.text-length{
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+
+body{
+    user-select: none;
+}

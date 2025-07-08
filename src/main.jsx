@@ -2,14 +2,9 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Library from './pages/Library.jsx'
-import Feed from './pages/Feed.jsx'
-import Trending from './pages/Trending.jsx'
-import Player from './pages/Player.jsx'
-import Favourite from './pages/Favourites.jsx'
 import NotFound from './pages/NotFound.jsx'
 import MainLayout from './Layouts/MainLayout.jsx'
-import MainPage from './pages/MainPage.jsx'
+
 
 const router = createBrowserRouter([
   {
