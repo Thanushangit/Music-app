@@ -2,8 +2,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
+import {songsData} from '../assets/assets.js'
 
-const Slider = () => {
+const Slider = ({selectedSong}) => {
+  
     return (
         <>
             <Swiper
@@ -13,7 +15,7 @@ const Slider = () => {
             >
                 <SwiperSlide className='w-full h-full flex items-center justify-center '>
                     <div className="border-4 border-amber-300 rounded-full w-64 h-64 md:w-96 md:h-96 overflow-hidden mx-auto mt-8 ">
-                        <img src="https://imagecdn.raaga.com/raagaimg/r_img/250/t/t0003506.jpg" alt="image" className="object-center object-cover rounded-full  w-64 h-64 md:w-96 md:h-96" />
+                        <img src={songsData[selectedSong]?.image} alt="image" className="object-center object-cover rounded-full  w-64 h-64 md:w-96 md:h-96" />
                     </div>
                 </SwiperSlide>
                 <SwiperSlide className='flex items-center justify-center '>
