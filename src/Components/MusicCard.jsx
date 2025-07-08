@@ -7,7 +7,7 @@ const MusicCard = ({ song, setSelectedSong, selectedSong, isPlaying }) => {
     return (
         <div onClick={() => setSelectedSong(id)} className={`flex items-center gap-3 md:gap-5 border ${id == selectedSong ? "border-[#ceebd3] p-1" : "border-[#225c2d]"} rounded-lg shadow-2xl transition-all hover:scale-[1.01] duration-300 cursor-pointer relative group`}>
             <div className={`w-18 h-18 md:w-24 md:h-24 overflow-hidden  ${id == selectedSong ? "rounded-full" : "rounded-lg"}`}>
-                <img src={image} alt="song-image" className={`object-center object-cover w-full h-full ${id == selectedSong ? "rounded-full" : "rounded-lg"} ${isPlaying && id == selectedSong ? "rotation" : ""}`} />
+                <img src={image} alt="song-image" className={`object-center object-cover w-full h-full ${id == selectedSong ? "rounded-full border-2 border-[#ceebd3]" : "rounded-lg"} ${isPlaying && id == selectedSong ? "rotation" : ""}`} />
             </div>
             <div className="pr-1">
                 <h1 className='text-gray-200 font-semibold md:text-xl text-length'>{name} </h1>
