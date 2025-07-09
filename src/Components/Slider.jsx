@@ -6,7 +6,7 @@ import { Navigation } from 'swiper/modules';
 import { songsData } from '../assets/assets.js';
 import WaveForm from '../Visualizer/WaveForm';
 
-const Slider = ({ selectedSong, audioRef }) => {
+const Slider = ({ selectedSong, audioRef,isPlaying }) => {
     const [analyzerData, setAnalyzerData] = useState(null);
     const audioCtxRef = useRef(null);
 
@@ -60,8 +60,8 @@ const Slider = ({ selectedSong, audioRef }) => {
     return (
         <Swiper rewind={true} modules={[Navigation]} className="w-full h-full">
             <SwiperSlide className='w-full h-full flex items-center justify-center '>
-                <div className="border-4 border-amber-300 rounded-full w-64 h-64 md:w-96 md:h-96 overflow-hidden mx-auto mt-8 ">
-                    <img src={songsData[selectedSong]?.image} alt="image" className="object-center object-cover rounded-full  w-64 h-64 md:w-96 md:h-96" />
+                <div className={`flex items-center justify-center rounded-full w-64 h-64 md:w-96 md:h-96 overflow-hidden shadow-2xl mx-auto mt-6.5 md:mt-8.5 p-1  ${isPlaying? "card" : ""}`}>
+                    <img src={songsData[selectedSong]?.image} alt="image" className="object-center object-cover rounded-full w-full h-full" />
                 </div>
             </SwiperSlide>
             <SwiperSlide id='wave' className=' h-full w-full'>
@@ -69,14 +69,11 @@ const Slider = ({ selectedSong, audioRef }) => {
                     {analyzerData && (
                         <WaveForm analyzerData={analyzerData} />
                     )}
+                    
                 </div>
 
             </SwiperSlide>
-            <SwiperSlide className='flex items-center justify-center '>
-                <div className='flex items-end justify-center h-full w-full'>
-                    <img src="./3d.PNG" alt="image" className="object-center object-cover " />
-                </div>
-            </SwiperSlide>
+           
         </Swiper>
     );
 };

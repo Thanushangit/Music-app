@@ -3,20 +3,20 @@
 @import "tailwindcss";
 
 
-@theme{
-    --font-cascadia:"Cascadia Code", sans-serif;
-    --font-saira:"Saira", sans-serif;
+@theme {
+    --font-cascadia: "Cascadia Code", sans-serif;
+    --font-saira: "Saira", sans-serif;
 }
 
-.mycontainer{
-    @apply  mx-auto px-4 py-2 md:px-8 md:py-4;
+.mycontainer {
+    @apply mx-auto px-4 py-2 md:px-8 md:py-4;
 }
 
-.musiccard::-webkit-scrollbar{
+.musiccard::-webkit-scrollbar {
     scrollbar-width: none;
 }
 
-.text-length{
+.text-length {
     display: -webkit-box;
     overflow: hidden;
     -webkit-line-clamp: 1;
@@ -24,7 +24,7 @@
     text-overflow: ellipsis;
 }
 
-body{
+body {
     user-select: none;
 }
 
@@ -32,12 +32,50 @@ body{
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
-    
+
 }
 
-.rotation{
+.rotation {
     animation: rotate 60s linear infinite;
+}
+
+
+
+
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+
+.card::after,
+.card::before {
+    @apply w-64 h-64 md:w-96 md:h-96 rounded-full ;
+    content: '';
+    position: absolute;
+    background-image: conic-gradient(from var(--angle), #063d27, #0b5236, #1b7c55, #2e994c, #00ff99);
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    z-index: -1;
+    animation: 8s spin linear infinite;
+}
+
+.card::before {
+    filter: blur(1.5rem);
+    opacity: 0.5;
+}
+
+@keyframes spin {
+    from {
+        --angle: 0deg;
+    }
+
+    to {
+        --angle: 360deg;
+    }
 }

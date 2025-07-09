@@ -14,7 +14,7 @@ function animateBars(analyser, canvas, canvasCtx, dataArray, bufferLength) {
     for (let i = 0; i < bufferLength; i++) {
         barHeight = (dataArray[i] / 255) * HEIGHT;
         const blueShade = Math.floor((dataArray[i] / 255) * 5);
-        const blueHex = ["#ff0042", "#ff0099", "#ff00b2", "#cf00e1", "#ff884d"][
+        const blueHex = ["#78ba51"][
             blueShade
         ];
         canvasCtx.fillStyle = blueHex;

@@ -100,10 +100,10 @@ const MainLayout = () => {
             </div>}
 
 
-            {!status && <div className="mycontainer h-screen w-full overflow-hidden bg-gradient-to-br from-[#1DB954] via-[#282727] to-[#4c4040] ">
+            {!status && <div className="mycontainer h-screen w-full overflow-hidden bg-gradient-to-br from-[#052f14] via-[#164526] to-[#053716] md:bg-gradient-to-br md:from-[#1DB954] md:via-[#282727] md:to-[#4c4040] ">
                 <Navbar />
                 <div className="flex flex-col-reverse md:flex-row  h-[85vh] md:h-[75vh]">
-                    <div className="flex mycontainer musiccard w-full md:w-1/2 h-full overflow-y-auto  flex-col gap-2 ">
+                    <div className="flex mycontainer musiccard w-full md:w-1/2 h-full overflow-y-auto  flex-col gap-2 mt-10 md:mt-5 ">
                         {songsData.map((song) => {
                             return (
                                 <MusicCard key={song.id} song={song} setSelectedSong={setSelectedSong} selectedSong={selectedSong} isPlaying={isPlaying} />
@@ -114,7 +114,7 @@ const MainLayout = () => {
 
 
                     <div className="w-full md:w-1/2  h-full  overflow-hidden">
-                        <Slider audioRef={audioRef} selectedSong={selectedSong} />
+                        <Slider audioRef={audioRef} selectedSong={selectedSong} isPlaying={isPlaying} />
                         
                     </div>
 

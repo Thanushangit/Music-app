@@ -3,7 +3,7 @@ import { FaRegPlayCircle } from "react-icons/fa";
 const MusicCard = ({ song, setSelectedSong, selectedSong, isPlaying }) => {
     const { name, image, desc, duration, id, singers } = song;
     return (
-        <div onClick={() => setSelectedSong(id)} className={`flex items-center gap-3 md:gap-5 border ${id == selectedSong ? "border-[#ceebd3] p-1" : "border-[#225c2d]"} rounded-lg shadow-2xl transition-all hover:scale-[1.01] duration-300 cursor-pointer relative group`}>
+        <div onClick={() => setSelectedSong(id)} className={`flex items-center gap-3 md:gap-5 border ${id == selectedSong ? "border-[#ceebd3] p-1" : "border-[#14471e]"} rounded-lg shadow-2xl transition-all hover:scale-[1.01] duration-300 cursor-pointer relative group`}>
             <div className={`w-14 h-14 md:w-24 md:h-24 overflow-hidden  ${id == selectedSong ? "rounded-full" : "rounded-lg"}`}>
                 <img src={image} alt="song-image" className={`object-center object-cover w-full h-full ${id == selectedSong ? "rounded-full border-2 border-[#ceebd3]" : "rounded-lg"} ${isPlaying && id == selectedSong ? "rotation" : ""}`} />
             </div>
