@@ -13,10 +13,10 @@ Tunify is a modern, responsive React music player that lets you stream your favo
 ## 🖼️ Screenshots
 
 ### Home Page
-![Home Screenshot](public/screenshot-1.PNG)
+![Home Screenshot](public/screenshot-1.webp)
 
 ### Player & Visualizer
-![Player Screenshot](public/screenshot-2.PNG)
+![Player Screenshot](public/screenshot-2.webp)
 
 ## 🛠️ Getting Started
 
