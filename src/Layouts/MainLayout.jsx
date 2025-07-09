@@ -8,7 +8,7 @@ import { IoMdPlay, IoMdPause } from "react-icons/io";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import Slider from "../Components/Slider";
 import { songsData } from "../assets/assets.js";
-import Circle from "../Components/Circle.jsx";
+
 
 
 const MainLayout = () => {
