@@ -115,7 +115,7 @@ const MainLayout = () => {
 
                     <div className="w-full md:w-1/2  h-full  overflow-hidden">
                         <Slider selectedSong={selectedSong} />
-                        {/* <Circle/> */}
+                        
                     </div>
 
 
