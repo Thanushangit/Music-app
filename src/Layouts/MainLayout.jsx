@@ -8,14 +8,16 @@ import { IoMdPlay, IoMdPause } from "react-icons/io";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import Slider from "../Components/Slider";
 import { songsData } from "../assets/assets.js";
+import Circle from "../Components/Circle.jsx";
 
 
 const MainLayout = () => {
     const [status, setStatus] = useState(true);
-    const [heart, setHeart] = useState(false);
-    const [selectedSong, setSelectedSong] = useState("0");
+    const [heart, setHeart] = useState(true);
+    const [selectedSong, setSelectedSong] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
+    const [duration, setDuration] = useState(0);
     const audioRef = useRef(null);
     const navigate = useNavigate();
 
@@ -33,6 +35,7 @@ const MainLayout = () => {
             audioRef.current.play();
         }
     }, [selectedSong]);
+
 
 
     const handlePlayPause = () => {
@@ -55,6 +58,31 @@ const MainLayout = () => {
         setSelectedSong((prev) => (prev - 1 >= 0 ? prev - 1 : songsData.length - 1));
     };
 
+    const handleSeek = (e) => {
+        audioRef.current.currentTime = e.target.value;
+        setCurrentTime(e.target.value);
+    }
+
+    const handleTimeUpdate = () => {
+        setCurrentTime(audioRef.current.currentTime);
+        setDuration(audioRef.current.duration || 0);
+    }
+
+    useEffect(() => {
+        if (!status) {
+            audioRef.current.addEventListener('timeupdate', handleTimeUpdate);
+
+            return () => {
+                audioRef.current.removeEventListener('timeupdate', handleTimeUpdate);
+            }
+        }
+    }, [selectedSong, status])
+
+    const formatTime = (time) => {
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60);
+        return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+    };
 
 
     return (
@@ -87,6 +115,7 @@ const MainLayout = () => {
 
                     <div className="w-full md:w-1/2  h-full  overflow-hidden">
                         <Slider selectedSong={selectedSong} />
+                        {/* <Circle/> */}
                     </div>
 
 
@@ -104,15 +133,13 @@ const MainLayout = () => {
                     </div>
 
                     <div className="mycontainer flex flex-col items-center fixed md:-bottom-10 bottom-0  right-0 z-20  md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:w-[500px]  bg-black md:bg-transparent  ">
-                        {/* <audio src={songsData[selectedSong]?.file} preload ></audio> */}
-                        <div className="h-1 md:h-2 w-full bg-amber-5 bg-amber-50 rounded-full cursor-pointer">
-                            <div className="h-1 md:h-2 w-2/3 bg-green-500 rounded-full"></div>
-                        </div>
-                        <div className="flex items-center justify-between w-full text-gray-50 ">
-                            <p className="text-sm text-[#9cb7a2]">--:--</p>
-                            <p className="text-sm text-[#9cb7a2]">{songsData[selectedSong]?.duration}</p>
-                        </div>
                         <audio ref={audioRef} src={songsData[selectedSong]?.file} preload="metadata" />
+                        <input type="range" className="h-1 md:h-2 w-full  accent-green-500" min={0} max={duration} value={currentTime} onChange={(e) => handleSeek(e)} />
+                        <div className="flex items-center justify-between w-full text-gray-50 ">
+                            <p className="text-sm text-[#9cb7a2]">{formatTime(currentTime)}</p>
+                            <p className="text-sm text-[#9cb7a2]">{formatTime(duration)}</p>
+                        </div>
+
 
                         <div className="flex items-center gap-4 text-3xl text-white">
                             <button><MdLoop /></button>
