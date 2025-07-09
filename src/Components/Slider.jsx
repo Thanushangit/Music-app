@@ -1,49 +1,84 @@
+import { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
-import {songsData} from '../assets/assets.js'
+import { songsData } from '../assets/assets.js';
+import WaveForm from '../Visualizer/WaveForm';
 
-const Slider = ({selectedSong}) => {
-  
+const Slider = ({ selectedSong, audioRef }) => {
+    const [analyzerData, setAnalyzerData] = useState(null);
+    const audioCtxRef = useRef(null);
+
+    useEffect(() => {
+        if (!audioRef?.current) return;
+
+        // Only create AudioContext and MediaElementSourceNode once
+        if (!audioCtxRef.current) {
+            audioCtxRef.current = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        const audioCtx = audioCtxRef.current;
+
+        // Resume context on play (required by browsers)
+        const resumeCtx = () => {
+            if (audioCtx.state === "suspended") {
+                audioCtx.resume();
+            }
+        };
+        audioRef.current.addEventListener("play", resumeCtx);
+
+        // Attach analyzer and source only once
+        if (!audioRef.current._analyzer) {
+            const analyzer = audioCtx.createAnalyser();
+            analyzer.fftSize = 128;
+            const bufferLength = analyzer.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+
+            const source = audioCtx.createMediaElementSource(audioRef.current);
+            source.connect(analyzer);
+            analyzer.connect(audioCtx.destination);
+
+            audioRef.current._analyzer = analyzer;
+            audioRef.current._bufferLength = bufferLength;
+            audioRef.current._dataArray = dataArray;
+        }
+
+        setAnalyzerData({
+            analyzer: audioRef.current._analyzer,
+            bufferLength: audioRef.current._bufferLength,
+            dataArray: audioRef.current._dataArray,
+        });
+
+        // Cleanup event listener only
+        return () => {
+            if (audioRef.current) {
+                audioRef.current.removeEventListener("play", resumeCtx);
+            }
+        };
+    }, [audioRef]);
+
     return (
-        <>
-            <Swiper
-                rewind={true}
-                modules={[Navigation]}
-                className="w-full h-full"
-            >
-                <SwiperSlide className='w-full h-full flex items-center justify-center '>
-                    <div className="border-4 border-amber-300 rounded-full w-64 h-64 md:w-96 md:h-96 overflow-hidden mx-auto mt-8 ">
-                        <img src={songsData[selectedSong]?.image} alt="image" className="object-center object-cover rounded-full  w-64 h-64 md:w-96 md:h-96" />
-                    </div>
-                </SwiperSlide>
-                <SwiperSlide className='flex items-center justify-center '>
-                   
-                       <div className='flex items-end justify-center h-full w-full'>
-                         <img src="./play.PNG" alt="image" className="object-center object-cover " />
-                       </div>
-                   
-                </SwiperSlide>
-                <SwiperSlide className='flex items-center justify-center '>
-                   
-                       <div className='flex items-end justify-center h-full w-full'>
-                         <img src="./3d.PNG" alt="image" className="object-center object-cover " />
-                       </div>
-                   
-                </SwiperSlide>
+        <Swiper rewind={true} modules={[Navigation]} className="w-full h-full">
+            <SwiperSlide className='w-full h-full flex items-center justify-center '>
+                <div className="border-4 border-amber-300 rounded-full w-64 h-64 md:w-96 md:h-96 overflow-hidden mx-auto mt-8 ">
+                    <img src={songsData[selectedSong]?.image} alt="image" className="object-center object-cover rounded-full  w-64 h-64 md:w-96 md:h-96" />
+                </div>
+            </SwiperSlide>
+            <SwiperSlide id='wave' className=' h-full w-full'>
+                <div className='flex items-end w-full h-full'>
+                    {analyzerData && (
+                        <WaveForm analyzerData={analyzerData} />
+                    )}
+                </div>
 
+            </SwiperSlide>
+            <SwiperSlide className='flex items-center justify-center '>
+                <div className='flex items-end justify-center h-full w-full'>
+                    <img src="./3d.PNG" alt="image" className="object-center object-cover " />
+                </div>
+            </SwiperSlide>
+        </Swiper>
+    );
+};
 
-                {/* <div className="border-4 border-amber-300 rounded-full overflow-hidden ">
-                            <img src="https://imagecdn.raaga.com/raagaimg/r_img/250/t/t0003506.jpg" alt="image" className="object-center object-cover rounded-full m-1 w-52 h-52 md:w-full md:h-full" />
-                        </div>
-
-                        <div className="h-16 w-full">
-                            <img src="./play.PNG" alt="player" className="object-bottom  h-full w-full" />
-                        </div> */}
-            </Swiper>
-        </>
-    )
-}
-
-export default Slider
+export default Slider;

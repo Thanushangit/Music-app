@@ -114,7 +114,7 @@ const MainLayout = () => {
 
 
                     <div className="w-full md:w-1/2  h-full  overflow-hidden">
-                        <Slider selectedSong={selectedSong} />
+                        <Slider audioRef={audioRef} selectedSong={selectedSong} />
                         
                     </div>
 
@@ -135,7 +135,7 @@ const MainLayout = () => {
                     <div className="mycontainer flex flex-col items-center fixed md:-bottom-10 bottom-0  right-0 z-20  md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:w-[500px]  bg-black md:bg-transparent  ">
                         <audio ref={audioRef} src={songsData[selectedSong]?.file} preload="metadata" />
                         <input type="range" className="h-1 md:h-2 w-full  accent-green-500" min={0} max={duration} value={currentTime} onChange={(e) => handleSeek(e)} />
-                        <div className="flex items-center justify-between w-full text-gray-50 ">
+                        <div className="flex items-center justify-between w-full text-gray-50 mt-1 ">
                             <p className="text-sm text-[#9cb7a2]">{formatTime(currentTime)}</p>
                             <p className="text-sm text-[#9cb7a2]">{formatTime(duration)}</p>
                         </div>
