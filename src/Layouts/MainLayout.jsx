@@ -36,6 +36,13 @@ const MainLayout = () => {
         }
     }, [selectedSong]);
 
+    useEffect(() => {
+        if (isPlaying && duration - currentTime < 1) {
+            setIsPlaying(false);
+        }
+    }, [currentTime, duration]);
+
+
 
 
     const handlePlayPause = () => {
@@ -115,7 +122,7 @@ const MainLayout = () => {
 
                     <div className="w-full md:w-1/2  h-full  overflow-hidden">
                         <Slider audioRef={audioRef} selectedSong={selectedSong} isPlaying={isPlaying} />
-                        
+
                     </div>
 
 
