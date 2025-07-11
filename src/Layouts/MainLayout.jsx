@@ -130,7 +130,7 @@ const MainLayout = () => {
 
                 <footer className="mt-2 relative   flex flex-col-reverse md:flex-row items-center justify-between gap-y-3">
                     <div className="hidden md:flex items-center gap-3 ">
-                        <img src={songsData[selectedSong]?.image} alt="image" className="w-12 h-12 md:w-16 md:h-16 object-center object-cover" />
+                        <img src={songsData[selectedSong]?.image} alt="image"  className="w-12 h-12 md:w-16 md:h-16 object-center object-cover" />
                         <div className="max-w-56">
                             <h1 className='text-gray-200 font-semibold text-lg md:text-xl text-length'>{songsData[selectedSong]?.name} </h1>
                             <p className=' text-[#8e9990] text-length'>{songsData[selectedSong]?.desc}</p>
@@ -140,7 +140,7 @@ const MainLayout = () => {
                     </div>
 
                     <div className="mycontainer flex flex-col items-center fixed md:-bottom-10 bottom-0  right-0 z-20  md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:w-[500px]  bg-black md:bg-transparent  ">
-                        <audio ref={audioRef} src={songsData[selectedSong]?.file} preload="metadata" />
+                        <audio ref={audioRef} src={songsData[selectedSong]?.file} crossOrigin="anonymous" preload="metadata" />
                         <input type="range" className="h-1 md:h-2 w-full  accent-green-500" min={0} max={duration} value={currentTime} onChange={(e) => handleSeek(e)} />
                         <div className="flex items-center justify-between w-full text-gray-50 mt-1 ">
                             <p className="text-sm text-[#9cb7a2]">{formatTime(currentTime)}</p>
